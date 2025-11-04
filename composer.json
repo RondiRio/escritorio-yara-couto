@@ -1,0 +1,16 @@
+{ 
+    "name": "escritorio/yara-couto-vitoria", 
+    "description": "Sistema de gerenciamento para escritorio de advocacia", 
+    "type": "project", 
+    "require": { 
+        "php": "^^7.4", 
+        "phpmailer/phpmailer": "^^6.5", 
+        "vlucas/phpdotenv": "^^5.4" 
+    }, 
+    "autoload": { 
+        "psr-4": { 
+            "App\\": "src/", 
+            "Core\\": "src/core/" 
+        } 
+    } 
+} 
