@@ -45,8 +45,8 @@ class HomeController extends Controller
         $pageTitle = $siteInfo['site_name'] ?? 'Escritório Yara Couto Vitoria';
         $pageDescription = $siteInfo['site_description'] ?? 'Advocacia Previdenciária com Excelência';
 
-        // Carrega view
-        $this->view('pages/home', [
+        // Carrega view com layout
+        $this->viewWithLayout('pages/home', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'recentPosts' => $recentPosts,

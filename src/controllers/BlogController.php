@@ -49,7 +49,7 @@ class BlogController extends Controller
         $pageDescription = 'Artigos, notícias e informações sobre direitos previdenciários';
 
         // Carrega view
-        $this->view('blog/index', [
+        $this->viewWithLayout('blog/index', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'posts' => $postsData['data'],
@@ -91,7 +91,7 @@ class BlogController extends Controller
         $pageDescription = $post['excerpt'] ?? truncate(strip_tags($post['content']), 160);
 
         // Carrega view
-        $this->view('blog/single', [
+        $this->viewWithLayout('blog/single', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'post' => $post,
@@ -133,7 +133,7 @@ class BlogController extends Controller
         $pageDescription = $category['description'] ?? '';
 
         // Carrega view
-        $this->view('blog/category', [
+        $this->viewWithLayout('blog/category', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'category' => $category,
@@ -171,7 +171,7 @@ class BlogController extends Controller
         $pageDescription = 'Artigos relacionados a ' . $tag['name'];
 
         // Carrega view
-        $this->view('blog/tag', [
+       $this->viewWithLayout('blog/tag', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'tag' => $tag,
@@ -203,7 +203,7 @@ class BlogController extends Controller
         $pageDescription = 'Resultados da busca por: ' . $searchTerm;
 
         // Carrega view
-        $this->view('blog/search', [
+        $this->viewWithLayout('blog/search', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'searchTerm' => $searchTerm,

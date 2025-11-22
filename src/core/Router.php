@@ -82,6 +82,10 @@ class Router
      */
     private function getUri()
     {
+        // Defina o caminho da sua subpasta
+        // Deve ser o mesmo do RewriteBase no .htaccess, mas sem aspas
+        $basePath = '/Softwares-Clientes/escritorio-yara-couto';
+
         // Obtém URI da requisição
         $uri = $_SERVER['REQUEST_URI'];
 
@@ -90,7 +94,13 @@ class Router
             $uri = substr($uri, 0, $pos);
         }
 
-        // Remove barras extras
+        // Remove o basePath do início da URI
+        // (Isso transforma "/Softwares Clientes/escritorio-yara-couto/blog" em "/blog")
+        if (strpos($uri, $basePath) === 0) {
+            $uri = substr($uri, strlen($basePath));
+        }
+
+        // Garante que a URI comece com uma barra (ou seja apenas "/")
         $uri = '/' . trim($uri, '/');
 
         return $uri;

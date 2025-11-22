@@ -1,5 +1,11 @@
 # Apache Configuration 
 RewriteEngine On 
+
+# Adicione esta linha para sua subpasta
+# ...
+RewriteBase "/Softwares-Clientes/escritorio-yara-couto/"
+# ...
+
 RewriteCond %{REQUEST_FILENAME} !-f 
 RewriteCond %{REQUEST_FILENAME} !-d 
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,L] 
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

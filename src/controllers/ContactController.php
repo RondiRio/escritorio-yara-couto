@@ -30,7 +30,7 @@ class ContactController extends Controller
         $pageDescription = 'Entre em contato com nosso escritório de advocacia';
 
         // Carrega view
-        $this->view('pages/contact', [
+        $this->viewWithLayout('pages/contact', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'siteInfo' => $siteInfo

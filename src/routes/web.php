@@ -102,7 +102,7 @@ $router->get('/index.php', function() {
 });
 
 // ==================== PÁGINA 404 ====================
-$router->notFound(function() {
-    http_response_code(404);
-    require __DIR__ . '/../views/errors/404.php';
-});
+// $router->notFound(function() {
+//     http_response_code(404);
+//     require __DIR__ . '/../views/errors/404.php';
+// });

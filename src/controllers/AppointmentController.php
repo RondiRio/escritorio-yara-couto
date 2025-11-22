@@ -32,8 +32,8 @@ class AppointmentController extends Controller
         $pageTitle = 'Agendar Consulta - Marque seu atendimento';
         $pageDescription = 'Agende uma consulta com nossos advogados especializados';
 
-        // Carrega view
-        $this->view('pages/appointment', [
+       // Carrega view
+        $this->viewWithLayout('pages/appointment', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'siteInfo' => $siteInfo

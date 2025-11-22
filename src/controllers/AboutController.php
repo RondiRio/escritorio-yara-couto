@@ -39,7 +39,8 @@ class AboutController extends Controller
         $pageDescription = 'Conheça nossa história, missão e equipe de advogados especializados';
 
         // Carrega view
-        $this->view('pages/about', [
+        // Carrega view
+        $this->viewWithLayout('pages/about', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'siteInfo' => $siteInfo,

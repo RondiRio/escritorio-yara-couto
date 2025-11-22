@@ -19,19 +19,71 @@ session_start();
 
 // ==================== AUTOLOAD ====================
 
-// Carrega Composer Autoload
-if (file_exists(__DIR__ . '/vendor/autoload.php')) {
-    require_once __DIR__ . '/vendor/autoload.php';
-} else {
-    die('Execute: composer install');
-}
+// ==================== AUTOLOAD (MANUAL) ====================
+
+spl_autoload_register(function ($class) {
+    $base_dir = __DIR__ . '/src/';
+    
+    // Converte o namespace (ex: Core\Controller) para um caminho de arquivo (ex: core/Controller.php)
+    $parts = explode('\\', $class);
+
+    // Converte o primeiro segmento do namespace (que é o diretório) para minúsculas
+    // ex: "Controllers" vira "controllers", "Models" vira "models"
+    if (!empty($parts)) {
+        $parts[0] = strtolower($parts[0]);
+    }
+
+    $file = $base_dir . implode('/', $parts) . '.php';
+
+    // // Se o arquivo existir, inclua-o
+    // if (file_exists($file)) {
+    //     require $file;
+    // }
+    // ==================== AUTOLOAD (MANUAL) ====================
+
+spl_autoload_register(function ($class) {
+    $base_dir = __DIR__ . '/src/';
+    
+    // Converte o namespace (ex: Core\Controller) para um caminho de arquivo
+    $parts = explode('\\', $class);
+
+    // Converte o primeiro segmento (ex: "Core", "Models", "Controllers") para minúsculas
+    if (!empty($parts)) {
+        $parts[0] = strtolower($parts[0]);
+    }
+
+    $file = $base_dir . implode('/', $parts) . '.php';
+
+    // Se o arquivo existir, inclua-o
+    if (file_exists($file)) {
+        require $file;
+    }
+});
+});
 
 // ==================== CARREGA VARIÁVEIS DE AMBIENTE ====================
 
-// Carrega .env
+// // Carrega .env
+// if (file_exists(__DIR__ . '/.env')) {
+//     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+//     $dotenv->load();
+// }
+// Carrega .env (Manualmente)
 if (file_exists(__DIR__ . '/.env')) {
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
+    $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) { // Ignora comentários
+            continue;
+        }
+        if (strpos($line, '=') !== false) {
+            list($name, $value) = explode('=', $line, 2);
+            $name = trim($name);
+            $value = trim($value);
+            putenv("$name=$value");
+            $_ENV[$name] = $value;
+            $_SERVER[$name] = $value;
+        }
+    }
 }
 
 // ==================== CONFIGURAÇÕES DA APLICAÇÃO ====================

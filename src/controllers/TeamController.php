@@ -42,7 +42,7 @@ class TeamController extends Controller
         $pageDescription = 'Conheça nossos advogados especializados em Direito Previdenciário e outras áreas';
 
         // Carrega view
-        $this->view('pages/team', [
+        $this->viewWithLayout('pages/team', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'lawyers' => $lawyers,
@@ -68,7 +68,7 @@ class TeamController extends Controller
         $pageDescription = truncate($lawyer['bio'] ?? '', 160);
 
         // Carrega view
-        $this->view('pages/lawyer-profile', [
+        $this->viewWithLayout('pages/lawyer-profile', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'lawyer' => $lawyer

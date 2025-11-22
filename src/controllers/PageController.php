@@ -28,7 +28,7 @@ class PageController extends Controller
         $pageTitle = 'Política de Privacidade - LGPD';
         $pageDescription = 'Nossa política de privacidade em conformidade com a Lei Geral de Proteção de Dados';
 
-        $this->view('pages/privacy', [
+        $this->viewWithLayout('pages/privacy', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'siteInfo' => $siteInfo
@@ -45,7 +45,7 @@ class PageController extends Controller
         $pageTitle = 'Termos de Uso';
         $pageDescription = 'Termos e condições de uso do site';
 
-        $this->view('pages/terms', [
+        $this->viewWithLayout('pages/terms', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'siteInfo' => $siteInfo
@@ -64,7 +64,7 @@ class PageController extends Controller
         $pageTitle = 'Aviso Legal - Publicidade Profissional';
         $pageDescription = 'Informações sobre publicidade profissional conforme normas da OAB';
 
-        $this->view('pages/legal-notice', [
+       $this->viewWithLayout('pages/legal-notice', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'siteInfo' => $siteInfo
@@ -122,7 +122,7 @@ class PageController extends Controller
         $pageTitle = 'Perguntas Frequentes - FAQ';
         $pageDescription = 'Tire suas dúvidas sobre direitos previdenciários';
 
-        $this->view('pages/faq', [
+        $this->viewWithLayout('pages/faq', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'faqs' => $faqs

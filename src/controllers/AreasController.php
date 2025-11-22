@@ -155,7 +155,7 @@ class AreasController extends Controller
         $pageDescription = 'Conheça todas as áreas de atuação do nosso escritório';
 
         // Carrega view
-        $this->view('pages/areas', [
+        $this->viewWithLayout('pages/areas', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'areas' => $areas
@@ -188,7 +188,7 @@ class AreasController extends Controller
         $pageDescription = $area['description'];
 
         // Carrega view
-        $this->view('pages/area-single', [
+        $this->viewWithLayout('pages/area-single', [
             'pageTitle' => $pageTitle,
             'pageDescription' => $pageDescription,
             'area' => $area
