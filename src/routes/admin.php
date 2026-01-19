@@ -189,11 +189,12 @@ $router->get('/admin/perfil/editar', 'ProfileController@edit');
 $router->post('/admin/perfil/editar', 'ProfileController@update');
 
 // Alterar senha própria
-$router->get('/admin/perfil/senha', 'ProfileController@changePasswordForm');
-$router->post('/admin/perfil/senha', 'ProfileController@changePassword');
+$router->get('/admin/perfil/alterar-senha', 'ProfileController@showChangePassword');
+$router->post('/admin/perfil/alterar-senha', 'ProfileController@changePassword');
 
-// Upload de avatar
-$router->post('/admin/perfil/avatar', 'ProfileController@uploadAvatar');
+// Upload e remoção de avatar (AJAX)
+$router->post('/admin/perfil/avatar/upload', 'ProfileController@uploadAvatar');
+$router->post('/admin/perfil/avatar/remover', 'ProfileController@removeAvatar');
 
 // ==================== CONFIGURAÇÕES ====================
 
