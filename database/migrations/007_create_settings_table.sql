@@ -17,18 +17,18 @@ CREATE TABLE IF NOT EXISTS `settings` (
 
 -- Configurações iniciais
 INSERT INTO `settings` (`key`, `value`, `type`, `group`) VALUES
-('site_name', 'Escritório Yara Couto Vitoria', 'string', 'general'),
-('site_description', 'Advocacia Previdenciária com Excelência', 'string', 'general'),
-('site_email', 'contato@escritorioyara.com.br', 'string', 'general'),
+('site_name', 'Sistema de Gestão de Escritórios', 'string', 'general'),
+('site_description', 'Sistema de Gestão para Escritórios de Advocacia e Contabilidade', 'string', 'general'),
+('site_email', 'contato@seuescritorio.com.br', 'string', 'general'),
 ('site_phone', '', 'string', 'general'),
 ('site_whatsapp', '', 'string', 'general'),
 ('site_address', '', 'text', 'general'),
 ('oab_number', '', 'string', 'general'),
 ('oab_state', 'RJ', 'string', 'general'),
-('meta_title', 'Escritório Yara Couto Vitoria - Advocacia Previdenciária', 'string', 'seo'),
+('meta_title', 'Sistema de Gestão de Escritórios - Advocacia e Contabilidade', 'string', 'seo'),
 ('meta_description', 'Escritório especializado em Direito Previdenciário. Aposentadorias, BPC/LOAS, Auxílio-Doença e mais.', 'string', 'seo'),
 ('meta_keywords', 'advocacia previdenciária, aposentadoria, inss, benefícios', 'string', 'seo'),
-('facebook_url', 'https://www.facebook.com/escritoriodrayaracouto/', 'string', 'social'),
+('facebook_url', '', 'string', 'social'),
 ('instagram_url', '', 'string', 'social'),
 ('linkedin_url', '', 'string', 'social'),
 ('youtube_url', '', 'string', 'social');

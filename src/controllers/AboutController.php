@@ -35,7 +35,7 @@ class AboutController extends Controller
         $stats = $this->lawyerModel->getStatistics();
 
         // Define dados da página
-        $pageTitle = 'Sobre o Escritório - ' . ($siteInfo['site_name'] ?? 'Yara Couto Vitoria');
+        $pageTitle = 'Sobre o Escritório - ' . ($siteInfo['site_name'] ?? 'Sistema de Gestão');
         $pageDescription = 'Conheça nossa história, missão e equipe de advogados especializados';
 
         // Carrega view

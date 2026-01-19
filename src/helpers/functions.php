@@ -2,7 +2,7 @@
 
 /**
  * Funções Auxiliares Globais
- * Escritório Yara Couto Vitoria
+ * Sistema de Gestão de Escritórios
  */
 
 // ==================== URL E REDIRECIONAMENTO ====================
@@ -363,7 +363,7 @@ function config($key, $default = null)
  */
 function app_name()
 {
-    return config('APP_NAME', 'Escritório Yara Couto Vitoria');
+    return config('APP_NAME', 'Sistema de Gestão de Escritórios');
 }
 
 // ==================== ARQUIVO ====================

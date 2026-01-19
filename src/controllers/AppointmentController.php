@@ -150,7 +150,7 @@ class AppointmentController extends Controller
     private function sendAppointmentEmail($data, $appointmentId)
     {
         $toEmail = $data['email'];
-        $siteName = $this->settingModel->get('site_name', 'Escritório Yara Couto Vitoria');
+        $siteName = $this->settingModel->get('site_name', 'Sistema de Gestão de Escritórios');
 
         $subject = "Confirmação de Agendamento - {$siteName}";
 

@@ -2,8 +2,8 @@
 
 /**
  * Rotas Administrativas
- * Escritório Yara Couto Vitoria
- * 
+ * Sistema de Gestão de Escritórios
+ *
  * IMPORTANTE: Todas as rotas administrativas devem ter proteção de autenticação
  */
 

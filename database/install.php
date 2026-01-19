@@ -2,10 +2,10 @@
 /*
 /**
  * Script de Instalação do Banco de Dados
- * Escritório Yara Couto Vitoria
- * 
+ * Sistema de Gestão de Escritórios
+ *
  * Execute este arquivo para criar o banco de dados e todas as tabelas
- * 
+ *
  * Uso: php database/install.php
  * Ou acesse via navegador: http://localhost/database/install.php
  */
@@ -28,13 +28,13 @@
 
 // // Configurações do banco
 // $host = getenv('DB_HOST') ?: '127.0.0.1';
-// $database = getenv('DB_DATABASE') ?: 'escritorio_yara';
+// $database = getenv('DB_DATABASE') ?: 'escritorio_db';
 // $username = getenv('DB_USERNAME') ?: 'root';
 // $password = getenv('DB_PASSWORD') ?: '';
 
 // echo "============================================\n";
 // echo " INSTALAÇÃO DO BANCO DE DADOS\n";
-// echo " Escritório Yara Couto Vitoria\n";
+// echo " Sistema de Gestão de Escritórios\n";
 // echo "============================================\n\n";
 
 // echo "Configurações:\n";
@@ -135,7 +135,7 @@
 
 //     echo "Credenciais de acesso:\n";
 //     echo "URL Admin: " . (getenv('APP_URL') ?: 'http://localhost') . "/admin\n";
-//     echo "Email: admin@escritorioyara.com.br\n";
+//     echo "Email: admin@seuescritorio.com.br\n";
 //     echo "Senha: admin123\n\n";
     
 //     echo "⚠ IMPORTANTE: Altere a senha padrão após o primeiro login!\n\n";

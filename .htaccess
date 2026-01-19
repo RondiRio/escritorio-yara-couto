@@ -1,10 +1,8 @@
 # Apache Configuration 
 RewriteEngine On 
 
-# Adicione esta linha para sua subpasta
-# ...
-RewriteBase "/Softwares-Clientes/escritorio-yara-couto/"
-# ...
+# Se estiver em uma subpasta, descomente e ajuste:
+# RewriteBase "/sua-subpasta/"
 
 RewriteCond %{REQUEST_FILENAME} !-f 
 RewriteCond %{REQUEST_FILENAME} !-d 

@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Usuário administrador padrão
--- Email: admin@escritorioyara.com.br
+-- Email: admin@seuescritorio.com.br
 -- Senha: admin123 (ALTERAR após primeiro login!)
 INSERT INTO `users` (`name`, `email`, `password`, `role`, `status`) VALUES
-('Administrador', 'admin@escritorioyara.com.br', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'active');
+('Administrador', 'admin@seuescritorio.com.br', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'active');

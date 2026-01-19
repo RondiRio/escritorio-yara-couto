@@ -1,7 +1,7 @@
 -- ========================================
 -- SCHEMA DO BANCO DE DADOS
--- Escritório Yara Couto Vitoria
--- Sistema de Gerenciamento de Advocacia
+-- Sistema de Gestão de Escritórios
+-- Advocacia e Contabilidade
 -- ========================================
 
 -- Configurações iniciais
@@ -11,11 +11,11 @@ SET NAMES utf8mb4;
 SET CHARACTER SET utf8mb4;
 
 -- Cria banco de dados (se não existir)
-CREATE DATABASE IF NOT EXISTS `escritorio_yara` 
-DEFAULT CHARACTER SET utf8mb4 
+CREATE DATABASE IF NOT EXISTS `escritorio_db`
+DEFAULT CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
-USE `escritorio_yara`;
+USE `escritorio_db`;
 
 -- ========================================
 -- TABELA: users
@@ -215,10 +215,10 @@ CREATE TABLE IF NOT EXISTS `activity_logs` (
 -- ========================================
 
 -- Usuário administrador padrão
--- Email: admin@escritorioyara.com.br
+-- Email: admin@seuescritorio.com.br
 -- Senha: admin123 (DEVE SER ALTERADA após primeiro login!)
 INSERT INTO `users` (`name`, `email`, `password`, `role`, `status`) VALUES
-('Administrador', 'admin@escritorioyara.com.br', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'active');
+('Administrador', 'admin@seuescritorio.com.br', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'active');
 
 -- Categorias padrão para o blog
 INSERT INTO `categories` (`name`, `slug`, `description`) VALUES
@@ -245,18 +245,18 @@ INSERT INTO `tags` (`name`, `slug`) VALUES
 
 -- Configurações iniciais do site
 INSERT INTO `settings` (`key`, `value`, `type`, `group`) VALUES
-('site_name', 'Escritório Yara Couto Vitoria', 'string', 'general'),
-('site_description', 'Advocacia Previdenciária com Excelência', 'string', 'general'),
-('site_email', 'contato@escritorioyara.com.br', 'string', 'general'),
+('site_name', 'Sistema de Gestão de Escritórios', 'string', 'general'),
+('site_description', 'Sistema de Gestão para Escritórios de Advocacia e Contabilidade', 'string', 'general'),
+('site_email', 'contato@seuescritorio.com.br', 'string', 'general'),
 ('site_phone', '', 'string', 'general'),
 ('site_whatsapp', '', 'string', 'general'),
 ('site_address', '', 'text', 'general'),
 ('oab_number', '', 'string', 'general'),
 ('oab_state', 'RJ', 'string', 'general'),
-('meta_title', 'Escritório Yara Couto Vitoria - Advocacia Previdenciária', 'string', 'seo'),
+('meta_title', 'Sistema de Gestão de Escritórios - Advocacia e Contabilidade', 'string', 'seo'),
 ('meta_description', 'Escritório especializado em Direito Previdenciário. Aposentadorias, BPC/LOAS, Auxílio-Doença e mais.', 'string', 'seo'),
 ('meta_keywords', 'advocacia previdenciária, aposentadoria, inss, benefícios', 'string', 'seo'),
-('facebook_url', 'https://www.facebook.com/escritoriodrayaracouto/', 'string', 'social'),
+('facebook_url', '', 'string', 'social'),
 ('instagram_url', '', 'string', 'social'),
 ('linkedin_url', '', 'string', 'social'),
 ('youtube_url', '', 'string', 'social');

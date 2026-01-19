@@ -2,7 +2,7 @@
 
 /**
  * Rotas Públicas do Site
- * Escritório Yara Couto Vitoria
+ * Sistema de Gestão de Escritórios
  */
 
 // ==================== PÁGINA INICIAL ====================

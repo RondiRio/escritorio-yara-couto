@@ -176,9 +176,9 @@ class Setting extends Model
     public function getSiteInfo()
     {
         return [
-            'site_name' => $this->get('site_name', 'Escritório Yara Couto Vitoria'),
-            'site_description' => $this->get('site_description', 'Advocacia Previdenciária'),
-            'site_email' => $this->get('site_email', 'contato@escritorioyara.com.br'),
+            'site_name' => $this->get('site_name', 'Sistema de Gestão de Escritórios'),
+            'site_description' => $this->get('site_description', 'Sistema de Gestão para Escritórios de Advocacia e Contabilidade'),
+            'site_email' => $this->get('site_email', 'contato@seuescritorio.com.br'),
             'site_phone' => $this->get('site_phone', ''),
             'site_whatsapp' => $this->get('site_whatsapp', ''),
             'site_address' => $this->get('site_address', ''),

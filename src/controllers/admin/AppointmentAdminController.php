@@ -340,7 +340,7 @@ class AppointmentAdminController extends Controller
      */
     private function sendConfirmationEmail($appointment)
     {
-        $subject = "Agendamento Confirmado - Escritório Yara Couto Vitoria";
+        $subject = "Agendamento Confirmado - Sistema de Gestão de Escritórios";
         
         $message = "
         <html>
@@ -369,7 +369,7 @@ class AppointmentAdminController extends Controller
      */
     private function sendCancellationEmail($appointment, $reason)
     {
-        $subject = "Agendamento Cancelado - Escritório Yara Couto Vitoria";
+        $subject = "Agendamento Cancelado - Sistema de Gestão de Escritórios";
         
         $message = "
         <html>

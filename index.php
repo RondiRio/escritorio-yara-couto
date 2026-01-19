@@ -2,7 +2,7 @@
 
 /**
  * Ponto de Entrada da Aplicação
- * Escritório Yara Couto Vitoria - Sistema de Gerenciamento
+ * Sistema de Gestão de Escritórios - Advocacia e Contabilidade
  */
 
 // ==================== CONFIGURAÇÃO INICIAL ====================
@@ -89,7 +89,7 @@ if (file_exists(__DIR__ . '/.env')) {
 // ==================== CONFIGURAÇÕES DA APLICAÇÃO ====================
 
 // Define constantes
-define('APP_NAME', getenv('APP_NAME') ?: 'Escritório Yara Couto Vitoria');
+define('APP_NAME', getenv('APP_NAME') ?: 'Sistema de Gestão de Escritórios');
 define('APP_ENV', getenv('APP_ENV') ?: 'production');
 define('APP_DEBUG', getenv('APP_DEBUG') === 'true');
 define('APP_URL', getenv('APP_URL') ?: 'http://localhost');

@@ -1,6 +1,6 @@
-# Escritorio Yara Couto Vitoria 
- 
-Sistema de Gerenciamento de Advocacia 
+# Sistema de Gestão de Escritórios
+
+Sistema de Gerenciamento para Escritórios de Advocacia e Contabilidade 
  
 ## Funcionalidades 
 - Site institucional 

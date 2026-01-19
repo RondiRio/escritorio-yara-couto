@@ -26,7 +26,7 @@ class Database
     private function __construct()
     {
         $this->host = getenv('DB_HOST') ?: '127.0.0.1';
-        $this->database = getenv('DB_DATABASE') ?: 'escritorio_yara';
+        $this->database = getenv('DB_DATABASE') ?: 'escritorio_db';
         $this->username = getenv('DB_USERNAME') ?: 'root';
         $this->password = getenv('DB_PASSWORD') ?: '';
 

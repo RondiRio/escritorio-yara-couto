@@ -1,8 +1,8 @@
-# 🗄️ Banco de Dados - Escritório Yara Couto Vitoria
+# 🗄️ Banco de Dados - Sistema de Gestão de Escritórios
 
 ## 📋 Estrutura do Banco de Dados
 
-Este banco de dados foi projetado para gerenciar todas as funcionalidades do sistema de advocacia.
+Este banco de dados foi projetado para gerenciar todas as funcionalidades do sistema de gestão para escritórios de advocacia e contabilidade.
 
 ### Tabelas Principais
 
@@ -39,8 +39,8 @@ mysql -u root -p < database/schema.sql
 ### Opção 4: Migrations Individuais
 
 ```bash
-mysql -u root -p escritorio_yara < database/migrations/001_create_users_table.sql
-mysql -u root -p escritorio_yara < database/migrations/002_create_categories_table.sql
+mysql -u root -p escritorio_db < database/migrations/001_create_users_table.sql
+mysql -u root -p escritorio_db < database/migrations/002_create_categories_table.sql
 # ... e assim por diante
 ```
 
@@ -63,7 +63,7 @@ activity_logs (N) ←──→ (1) users
 
 **⚠️ IMPORTANTE: Altere após o primeiro login!**
 
-- **Email:** `admin@escritorioyara.com.br`
+- **Email:** `admin@seuescritorio.com.br`
 - **Senha:** `admin123`
 - **URL Admin:** `http://localhost/admin`
 
@@ -147,11 +147,11 @@ Após instalação, o sistema vem com estas configurações:
 
 | Chave | Valor Padrão |
 |-------|-------------|
-| `site_name` | Escritório Yara Couto Vitoria |
-| `site_description` | Advocacia Previdenciária com Excelência |
-| `site_email` | contato@escritorioyara.com.br |
+| `site_name` | Sistema de Gestão de Escritórios |
+| `site_description` | Sistema de Gestão para Escritórios de Advocacia e Contabilidade |
+| `site_email` | contato@seuescritorio.com.br |
 | `oab_state` | RJ |
-| `facebook_url` | https://www.facebook.com/escritoriodrayaracouto/ |
+| `facebook_url` | (vazio) |
 
 ## 📈 Índices e Performance
 
@@ -172,13 +172,13 @@ Após instalação, o sistema vem com estas configurações:
 ### Backup Manual
 
 ```bash
-mysqldump -u root -p escritorio_yara > backup_$(date +%Y%m%d).sql
+mysqldump -u root -p escritorio_db > backup_$(date +%Y%m%d).sql
 ```
 
 ### Restauração
 
 ```bash
-mysql -u root -p escritorio_yara < backup_20250131.sql
+mysql -u root -p escritorio_db < backup_20250131.sql
 ```
 
 ### Limpeza de Logs Antigos
@@ -195,7 +195,7 @@ CALL sp_clean_old_logs(90); -- Remove logs com mais de 90 dias
 
 ### Erro: "Database already exists"
 - Normal se executar novamente
-- Use `DROP DATABASE escritorio_yara;` para recriar
+- Use `DROP DATABASE escritorio_db;` para recriar
 
 ### Erro: "Table already exists"
 - As migrations usam `IF NOT EXISTS`

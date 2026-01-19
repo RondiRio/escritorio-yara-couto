@@ -1,6 +1,6 @@
 { 
-    "name": "escritorio/yara-couto-vitoria", 
-    "description": "Sistema de gerenciamento para escritorio de advocacia", 
+    "name": "escritorio/gestao-escritorios",
+    "description": "Sistema de gestão para escritórios de advocacia e contabilidade", 
     "type": "project", 
     "require": { 
         "php": "^^7.4", 

@@ -42,8 +42,8 @@ class HomeController extends Controller
         $totalCasesWon = $this->lawyerModel->getTotalCasesWon();
 
         // Define título da página
-        $pageTitle = $siteInfo['site_name'] ?? 'Escritório Yara Couto Vitoria';
-        $pageDescription = $siteInfo['site_description'] ?? 'Advocacia Previdenciária com Excelência';
+        $pageTitle = $siteInfo['site_name'] ?? 'Sistema de Gestão de Escritórios';
+        $pageDescription = $siteInfo['site_description'] ?? 'Sistema de Gestão para Escritórios de Advocacia e Contabilidade';
 
         // Carrega view com layout
         $this->viewWithLayout('pages/home', [
