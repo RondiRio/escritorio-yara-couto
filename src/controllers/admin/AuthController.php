@@ -340,14 +340,7 @@ class AuthController extends Controller
         </html>
         ";
 
-        $headers = [
-            'MIME-Version: 1.0',
-            'Content-type: text/html; charset=UTF-8',
-            'From: ' . (getenv('MAIL_FROM_ADDRESS') ?: 'noreply@sistema.com.br'),
-            'Reply-To: ' . (getenv('MAIL_FROM_ADDRESS') ?: 'noreply@sistema.com.br')
-        ];
-
-        // Envia email
-        mail($to, $subject, $message, implode("\r\n", $headers));
+        // Envia email usando PHPMailer
+        return send_mail($to, $subject, $message, $user['name']);
     }
 }

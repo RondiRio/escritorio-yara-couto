@@ -125,16 +125,14 @@ class ContactController extends Controller
         </html>
         ";
 
-        // Headers
-        $headers = [
-            'MIME-Version: 1.0',
-            'Content-type: text/html; charset=UTF-8',
-            'From: ' . $data['email'],
-            'Reply-To: ' . $data['email'],
-            'X-Mailer: PHP/' . phpversion()
-        ];
-
-        // Envia e-mail
-        return mail($toEmail, $subject, $message, implode("\r\n", $headers));
+        // Envia e-mail usando PHPMailer com Reply-To configurado
+        try {
+            $mailer = \Core\Mailer::getInstance();
+            $mailer->setReplyTo($data['email'], $data['name']);
+            return $mailer->send($toEmail, $subject, $message);
+        } catch (Exception $e) {
+            error_log("Erro ao enviar email de contato: {$e->getMessage()}");
+            return false;
+        }
     }
 }

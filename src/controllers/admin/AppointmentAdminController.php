@@ -355,13 +355,8 @@ class AppointmentAdminController extends Controller
         </html>
         ";
         
-        $headers = [
-            'MIME-Version: 1.0',
-            'Content-type: text/html; charset=UTF-8',
-            'From: ' . getenv('MAIL_FROM_ADDRESS')
-        ];
-        
-        mail($appointment['email'], $subject, $message, implode("\r\n", $headers));
+        // Envia email usando PHPMailer
+        send_mail($appointment['email'], $subject, $message, $appointment['name']);
     }
 
     /**
@@ -383,12 +378,7 @@ class AppointmentAdminController extends Controller
         </html>
         ";
         
-        $headers = [
-            'MIME-Version: 1.0',
-            'Content-type: text/html; charset=UTF-8',
-            'From: ' . getenv('MAIL_FROM_ADDRESS')
-        ];
-        
-        mail($appointment['email'], $subject, $message, implode("\r\n", $headers));
+        // Envia email usando PHPMailer
+        send_mail($appointment['email'], $subject, $message, $appointment['name']);
     }
 }

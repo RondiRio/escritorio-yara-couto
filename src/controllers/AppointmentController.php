@@ -179,20 +179,14 @@ class AppointmentController extends Controller
         </html>
         ";
 
-        $headers = [
-            'MIME-Version: 1.0',
-            'Content-type: text/html; charset=UTF-8',
-            'From: ' . getenv('MAIL_FROM_ADDRESS'),
-            'X-Mailer: PHP/' . phpversion()
-        ];
-
-        mail($toEmail, $subject, $message, implode("\r\n", $headers));
+        // Envia para o cliente
+        send_mail($toEmail, $subject, $message, $data['name']);
 
         // Envia também para o escritório
         $adminEmail = $this->settingModel->get('site_email', getenv('MAIL_FROM_ADDRESS'));
         $adminSubject = "Novo Agendamento - #{$appointmentId}";
-        
-        mail($adminEmail, $adminSubject, $message, implode("\r\n", $headers));
+
+        send_mail($adminEmail, $adminSubject, $message);
     }
 
     /**

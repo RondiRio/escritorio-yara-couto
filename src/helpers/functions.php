@@ -449,3 +449,45 @@ function verify_csrf($token)
 {
     return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
 }
+
+// ==================== EMAIL ====================
+
+/**
+ * Envia um email usando PHPMailer
+ *
+ * @param string $to Email do destinatário
+ * @param string $subject Assunto
+ * @param string $body Corpo do email (HTML)
+ * @param string $toName Nome do destinatário (opcional)
+ * @return bool
+ */
+function send_mail($to, $subject, $body, $toName = '')
+{
+    try {
+        $mailer = Core\Mailer::getInstance();
+        return $mailer->send($to, $subject, $body, $toName);
+    } catch (Exception $e) {
+        error_log("Erro ao enviar email: {$e->getMessage()}");
+        return false;
+    }
+}
+
+/**
+ * Envia email usando template
+ *
+ * @param string $to Email do destinatário
+ * @param string $subject Assunto
+ * @param string $template Nome do template
+ * @param array $data Dados para o template
+ * @return bool
+ */
+function send_mail_template($to, $subject, $template, $data = [])
+{
+    try {
+        $mailer = Core\Mailer::getInstance();
+        return $mailer->sendTemplate($to, $subject, $template, $data);
+    } catch (Exception $e) {
+        error_log("Erro ao enviar email com template: {$e->getMessage()}");
+        return false;
+    }
+}
