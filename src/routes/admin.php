@@ -198,35 +198,20 @@ $router->post('/admin/perfil/avatar/remover', 'ProfileController@removeAvatar');
 
 // ==================== CONFIGURAÇÕES ====================
 
-// Configurações gerais
+// Página principal de configurações
 $router->get('/admin/configuracoes', 'SettingsController@index');
-$router->post('/admin/configuracoes', 'SettingsController@update');
 
-// Configurações do site
-$router->get('/admin/configuracoes/site', 'SettingsController@site');
-$router->post('/admin/configuracoes/site', 'SettingsController@updateSite');
-
-// Configurações de SEO
-$router->get('/admin/configuracoes/seo', 'SettingsController@seo');
+// Atualizar configurações por grupo
+$router->post('/admin/configuracoes/geral', 'SettingsController@updateGeneral');
 $router->post('/admin/configuracoes/seo', 'SettingsController@updateSeo');
-
-// Configurações de e-mail
-$router->get('/admin/configuracoes/email', 'SettingsController@email');
 $router->post('/admin/configuracoes/email', 'SettingsController@updateEmail');
+$router->post('/admin/configuracoes/redes-sociais', 'SettingsController@updateSocial');
+$router->post('/admin/configuracoes/whatsapp', 'SettingsController@updateWhatsapp');
 
-// Testar e-mail
-$router->post('/admin/configuracoes/email/testar', 'SettingsController@testEmail');
-
-// Configurações de WhatsApp
-$router->get('/admin/configuracoes/whatsapp', 'SettingsController@whatsapp');
-$router->post('/admin/configuracoes/whatsapp', 'SettingsController@updateWhatsApp');
-
-// Testar WhatsApp
-$router->post('/admin/configuracoes/whatsapp/testar', 'SettingsController@testWhatsApp');
-
-// Configurações de redes sociais
-$router->get('/admin/configuracoes/redes-sociais', 'SettingsController@socialMedia');
-$router->post('/admin/configuracoes/redes-sociais', 'SettingsController@updateSocialMedia');
+// Ações especiais (AJAX)
+$router->post('/admin/configuracoes/testar-email', 'SettingsController@testEmail');
+$router->post('/admin/configuracoes/limpar-cache', 'SettingsController@clearCache');
+$router->get('/admin/configuracoes/info-sistema', 'SettingsController@systemInfo');
 
 // ==================== LOGS DE ATIVIDADES ====================
 
