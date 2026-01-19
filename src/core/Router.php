@@ -141,7 +141,15 @@ class Router
 
                 if (class_exists($controllerClass)) {
                     $controller = new $controllerClass();
-                    
+
+                    // Executa middlewares do controller (se houver)
+                    if (method_exists($controller, 'runMiddlewares')) {
+                        if (!$controller->runMiddlewares()) {
+                            // Middleware bloqueou a requisição
+                            return;
+                        }
+                    }
+
                     if (method_exists($controller, $methodName)) {
                         return call_user_func_array([$controller, $methodName], $params);
                     }

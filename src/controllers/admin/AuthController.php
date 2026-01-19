@@ -47,9 +47,9 @@ class AuthController extends Controller
             $this->redirect('admin/login');
         }
 
-        // Obtém dados
-        $email = $this->post('email');
-        $password = $this->post('password');
+        // Obtém e sanitiza dados
+        $email = $this->sanitize($this->post('email'));
+        $password = $this->post('password'); // Senha não deve ser sanitizada, será hasheada
         $remember = $this->post('remember');
 
         // Valida dados

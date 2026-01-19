@@ -8,6 +8,52 @@ namespace Core;
 abstract class Controller
 {
     /**
+     * Middlewares a serem executados
+     */
+    protected $middlewares = [];
+
+    /**
+     * Executa os middlewares
+     *
+     * @return bool
+     */
+    public function runMiddlewares()
+    {
+        foreach ($this->middlewares as $middleware) {
+            // Se é uma string, instancia a classe
+            if (is_string($middleware)) {
+                $middlewareClass = "Middleware\\{$middleware}";
+                if (class_exists($middlewareClass)) {
+                    $middleware = new $middlewareClass();
+                } else {
+                    error_log("Middleware não encontrado: {$middlewareClass}");
+                    continue;
+                }
+            }
+
+            // Se é um array [classe, parametros]
+            if (is_array($middleware)) {
+                $middlewareClass = "Middleware\\" . $middleware[0];
+                $params = $middleware[1] ?? [];
+                if (class_exists($middlewareClass)) {
+                    $middleware = new $middlewareClass($params);
+                } else {
+                    error_log("Middleware não encontrado: {$middlewareClass}");
+                    continue;
+                }
+            }
+
+            // Executa o middleware
+            if (method_exists($middleware, 'handle')) {
+                if (!$middleware->handle()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
      * Carrega uma view
      */
     protected function view($viewPath, $data = [])

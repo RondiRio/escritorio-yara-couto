@@ -114,6 +114,20 @@ require_once __DIR__ . '/src/helpers/functions.php';
 require_once __DIR__ . '/src/config/database.php';
 require_once __DIR__ . '/src/config/app.php';
 
+// ==================== APLICA MIDDLEWARES GLOBAIS ====================
+
+// Sanitização automática de todas as entradas (DEVE SER O PRIMEIRO)
+$sanitizeMiddleware = new Middleware\SanitizeInputMiddleware();
+$sanitizeMiddleware->handle();
+
+// Headers de segurança (aplica em todas as requisições)
+$securityHeaders = new Middleware\SecurityHeadersMiddleware();
+$securityHeaders->handle();
+
+// CSRF Protection (aplica automaticamente em POST/PUT/DELETE/PATCH)
+$csrfMiddleware = new Middleware\CsrfMiddleware();
+$csrfMiddleware->handle();
+
 // ==================== INICIALIZA ROTEADOR ====================
 
 use Core\Router;
