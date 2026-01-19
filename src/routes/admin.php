@@ -163,24 +163,20 @@ $router->get('/admin/agendamentos/exportar', 'AppointmentAdminController@export'
 $router->get('/admin/usuarios', 'UserController@index');
 
 // Criar usuário
-$router->get('/admin/usuarios/criar', 'UserController@create');
-$router->post('/admin/usuarios/criar', 'UserController@store');
+$router->get('/admin/usuarios/novo', 'UserController@create');
+$router->post('/admin/usuarios/novo', 'UserController@store');
 
 // Editar usuário
 $router->get('/admin/usuarios/{id}/editar', 'UserController@edit');
 $router->post('/admin/usuarios/{id}/editar', 'UserController@update');
 
-// Visualizar usuário
-$router->get('/admin/usuarios/{id}', 'UserController@show');
-
 // Deletar usuário
-$router->post('/admin/usuarios/{id}/deletar', 'UserController@delete');
+$router->post('/admin/usuarios/{id}/deletar', 'UserController@destroy');
 
-// Alterar status
-$router->post('/admin/usuarios/{id}/status', 'UserController@changeStatus');
+// Alterar status (AJAX)
+$router->post('/admin/usuarios/{id}/status', 'UserController@toggleStatus');
 
 // Alterar senha
-$router->get('/admin/usuarios/{id}/alterar-senha', 'UserController@changePasswordForm');
 $router->post('/admin/usuarios/{id}/alterar-senha', 'UserController@changePassword');
 
 // ==================== PERFIL DO USUÁRIO ====================
