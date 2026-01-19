@@ -5,6 +5,7 @@ namespace Controllers\Admin;
 use Core\Controller;
 use Models\User;
 use Models\ActivityLog;
+use Models\PasswordReset;
 
 /**
  * AuthController - Gerencia autenticação administrativa
@@ -13,11 +14,13 @@ class AuthController extends Controller
 {
     private $userModel;
     private $activityLogModel;
+    private $passwordResetModel;
 
     public function __construct()
     {
         $this->userModel = new User();
         $this->activityLogModel = new ActivityLog();
+        $this->passwordResetModel = new PasswordReset();
     }
 
     /**
@@ -144,11 +147,31 @@ class AuthController extends Controller
             $this->redirect('admin/recuperar-senha');
         }
 
-        // Gera token
-        $token = bin2hex(random_bytes(32));
-        
-        // TODO: Salvar token no banco com expiração
-        // TODO: Enviar e-mail com link de reset
+        // Verifica se pode solicitar novo token (rate limiting)
+        $waitTime = $this->passwordResetModel->getTimeUntilNextRequest($email);
+        if ($waitTime > 0) {
+            $minutes = ceil($waitTime / 60);
+            flash('error', "Aguarde {$minutes} minutos antes de solicitar novo link");
+            $this->redirect('admin/recuperar-senha');
+        }
+
+        // Cria token
+        $token = $this->passwordResetModel->createToken($email);
+
+        // Envia e-mail com link de reset
+        $resetLink = base_url("admin/redefinir-senha/{$token}");
+        $this->sendPasswordResetEmail($user, $resetLink);
+
+        // Log da ação
+        $this->activityLogModel->create([
+            'user_id' => $user['id'],
+            'action' => 'password_reset_requested',
+            'entity_type' => 'user',
+            'entity_id' => $user['id'],
+            'description' => 'Solicitação de redefinição de senha',
+            'ip_address' => $_SERVER['REMOTE_ADDR'] ?? null,
+            'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? null
+        ]);
 
         flash('success', 'Instruções enviadas para seu e-mail');
         $this->redirect('admin/login');
@@ -159,13 +182,20 @@ class AuthController extends Controller
      */
     public function showResetPasswordForm($token)
     {
-        // TODO: Verificar se token é válido
+        // Verifica se token é válido
+        $tokenData = $this->passwordResetModel->validateToken($token);
+
+        if (!$tokenData) {
+            flash('error', 'Link de redefinição inválido ou expirado');
+            $this->redirect('admin/recuperar-senha');
+        }
 
         $pageTitle = 'Redefinir Senha';
 
         $this->view('admin/reset-password', [
             'pageTitle' => $pageTitle,
-            'token' => $token
+            'token' => $token,
+            'email' => $tokenData['email']
         ]);
     }
 
@@ -183,7 +213,7 @@ class AuthController extends Controller
         $passwordConfirm = $this->post('password_confirm');
 
         // Validações
-        if (empty($password) || empty($passwordConfirm)) {
+        if (empty($token) || empty($password) || empty($passwordConfirm)) {
             flash('error', 'Preencha todos os campos');
             back();
         }
@@ -198,9 +228,126 @@ class AuthController extends Controller
             back();
         }
 
-        // TODO: Verificar token e atualizar senha
+        // Verifica token
+        $tokenData = $this->passwordResetModel->validateToken($token);
 
-        flash('success', 'Senha redefinida com sucesso');
+        if (!$tokenData) {
+            flash('error', 'Link de redefinição inválido ou expirado');
+            $this->redirect('admin/recuperar-senha');
+        }
+
+        // Busca usuário
+        $user = $this->userModel->findByEmail($tokenData['email']);
+
+        if (!$user) {
+            flash('error', 'Usuário não encontrado');
+            $this->redirect('admin/login');
+        }
+
+        // Atualiza senha
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $this->userModel->update($user['id'], ['password' => $hashedPassword]);
+
+        // Marca token como usado
+        $this->passwordResetModel->markAsUsed($token);
+
+        // Log da ação
+        $this->activityLogModel->create([
+            'user_id' => $user['id'],
+            'action' => 'password_reset_completed',
+            'entity_type' => 'user',
+            'entity_id' => $user['id'],
+            'description' => 'Senha redefinida com sucesso',
+            'ip_address' => $_SERVER['REMOTE_ADDR'] ?? null,
+            'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? null
+        ]);
+
+        flash('success', 'Senha redefinida com sucesso! Faça login com sua nova senha');
         $this->redirect('admin/login');
+    }
+
+    /**
+     * Envia e-mail de recuperação de senha
+     *
+     * @param array $user
+     * @param string $resetLink
+     */
+    private function sendPasswordResetEmail($user, $resetLink)
+    {
+        $to = $user['email'];
+        $subject = 'Recuperação de Senha - ' . app_name();
+
+        $message = "
+        <html>
+        <head>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    background-color: #f9f9f9;
+                }
+                .content {
+                    background-color: #ffffff;
+                    padding: 30px;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                }
+                .button {
+                    display: inline-block;
+                    padding: 12px 30px;
+                    background-color: #06253D;
+                    color: #ffffff;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    margin: 20px 0;
+                }
+                .footer {
+                    margin-top: 20px;
+                    padding-top: 20px;
+                    border-top: 1px solid #ddd;
+                    font-size: 12px;
+                    color: #666;
+                }
+            </style>
+        </head>
+        <body>
+            <div class='container'>
+                <div class='content'>
+                    <h2>Recuperação de Senha</h2>
+                    <p>Olá, <strong>{$user['name']}</strong>!</p>
+                    <p>Recebemos uma solicitação para redefinir a senha da sua conta.</p>
+                    <p>Clique no botão abaixo para redefinir sua senha:</p>
+                    <p style='text-align: center;'>
+                        <a href='{$resetLink}' class='button'>Redefinir Senha</a>
+                    </p>
+                    <p>Ou copie e cole este link no seu navegador:</p>
+                    <p style='word-break: break-all; color: #06253D;'>{$resetLink}</p>
+                    <p><strong>Este link expira em 1 hora.</strong></p>
+                    <p>Se você não solicitou esta redefinição, ignore este e-mail.</p>
+                    <div class='footer'>
+                        <p>Este é um e-mail automático, por favor não responda.</p>
+                        <p>&copy; " . date('Y') . " " . app_name() . ". Todos os direitos reservados.</p>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>
+        ";
+
+        $headers = [
+            'MIME-Version: 1.0',
+            'Content-type: text/html; charset=UTF-8',
+            'From: ' . (getenv('MAIL_FROM_ADDRESS') ?: 'noreply@sistema.com.br'),
+            'Reply-To: ' . (getenv('MAIL_FROM_ADDRESS') ?: 'noreply@sistema.com.br')
+        ];
+
+        // Envia email
+        mail($to, $subject, $message, implode("\r\n", $headers));
     }
 }
