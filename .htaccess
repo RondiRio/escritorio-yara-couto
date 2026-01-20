@@ -1,9 +1,9 @@
-# Apache Configuration 
-RewriteEngine On 
+# Apache Configuration
+RewriteEngine On
 
-# Se estiver em uma subpasta, descomente e ajuste:
-# RewriteBase "/sua-subpasta/"
+# RewriteBase é detectado automaticamente pelo Router!
+# Não precisa configurar manualmente.
 
-RewriteCond %{REQUEST_FILENAME} !-f 
-RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
