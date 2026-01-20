@@ -78,8 +78,8 @@ class UserController extends Controller
             'admins' => $this->userModel->countByRole('admin'),
             'editors' => $this->userModel->countByRole('editor'),
             'authors' => $this->userModel->countByRole('author'),
-            'active' => $this->userModel->where('status', 'active')->count(),
-            'inactive' => $this->userModel->where('status', 'inactive')->count()
+            'active' => $this->userModel->count("status = 'active'"),
+            'inactive' => $this->userModel->count("status = 'inactive'")
         ];
 
         $this->view('admin/users/index', [

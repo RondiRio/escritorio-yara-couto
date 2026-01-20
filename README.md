@@ -35,6 +35,46 @@ Sistema completo de gerenciamento para **Escritórios de Advocacia e Contabilida
 - ✅ Middlewares de autenticação e autorização
 - ✅ Rate limiting em recuperação de senha
 - ✅ Logs de auditoria completos
+- ✅ **LGPD Compliance:** Anonimização automática de dados
+
+### 🤖 **Intelligence Decision System (IDS)**
+**Sistema de Suporte à Decisão com 5 Camadas de Inteligência**
+
+#### **Camada 1: Background Check**
+- Validação de CPF via API Serpro
+- Busca de processos judiciais via API Jusbrasil
+- Cálculo de score de risco (0-100)
+- Recomendações baseadas em histórico
+
+#### **Camada 2: Recomendação de Advogados**
+- Algoritmo de matching por especialização (40%)
+- Taxa de sucesso histórica (30%)
+- Experiência em casos similares (15%)
+- Performance recente (10%)
+- Avaliação de clientes (5%)
+
+#### **Camada 3: Análise de Sentimento (NLP)**
+- Análise de urgência de mensagens (1-10)
+- Detecção de emoção (calmo/preocupado/ansioso/desesperado)
+- Identificação automática de área do direito
+- Priorização inteligente de atendimentos
+- Integração OpenAI GPT para análise avançada
+
+#### **Camada 4: Compliance LGPD**
+- Anonimização automática após 24 meses
+- Direito ao esquecimento (Right to be Forgotten)
+- Portabilidade de dados (Data Portability)
+- Mascaramento de dados sensíveis
+- Log completo de todas as operações
+
+#### **Camada 5: Business Intelligence**
+- Predição de receita para próximos meses
+- Análise de funil de conversão
+- Tendências de agendamentos
+- Dashboard com insights avançados
+- Stored Procedures otimizadas
+
+📘 **[Guia Completo do IDS](IDS_GUIDE.md)** - Documentação técnica detalhada
 
 ### 📧 **Sistema de Email**
 - PHPMailer integrado (SMTP confiável)
@@ -265,11 +305,13 @@ escritorio-yara-couto/
 - **Controllers:** 15+ (Admin: 10, Público: 5)
 - **Models:** 8
 - **Middlewares:** 5
+- **Intelligence Services:** 4 (BackgroundCheck, LawyerRecommendation, NLP, LGPD)
+- **Stored Procedures:** 4 (Revenue Prediction, Dashboard Stats, Conversion Funnel, Trends)
 - **Rotas:** 300+
 - **Views:** 30+
-- **Tabelas do Banco:** 9
-- **Migrations:** 9
-- **Linhas de Código:** ~15.000+
+- **Tabelas do Banco:** 13 (inclui 4 tabelas do IDS)
+- **Migrations:** 11
+- **Linhas de Código:** ~20.000+
 
 ---
 
@@ -282,6 +324,10 @@ _(Adicione capturas de tela do sistema aqui)_
 ## 🚧 Funcionalidades Futuras (Roadmap)
 
 ### **Fase 2 - Funcionalidades Avançadas**
+- [x] **Intelligence Decision System (IDS) completo** ✅
+- [x] **Análise de sentimento com NLP** ✅
+- [x] **Predição de receita com BI** ✅
+- [x] **Compliance LGPD automático** ✅
 - [ ] Sistema de backup automático
 - [ ] Relatórios com gráficos (Chart.js)
 - [ ] API REST completa
@@ -292,9 +338,10 @@ _(Adicione capturas de tela do sistema aqui)_
 - [ ] Sitemap dinâmico
 
 ### **Fase 3 - IA e Data Science**
+- [x] **Background Check com APIs externas** ✅
+- [x] **Recomendação inteligente de advogados** ✅
 - [ ] OCR para escaneamento de documentos
-- [ ] Análise de dados com Machine Learning
-- [ ] Predição de casos jurídicos
+- [ ] Análise de dados com Machine Learning avançado
 - [ ] Geração de contratos com IA
 - [ ] Classificação automática de documentos
 - [ ] Chatbot de atendimento
@@ -322,6 +369,17 @@ Contribuições são bem-vindas! Para contribuir:
 ---
 
 ## 📝 Changelog
+
+### **Versão 2.0.0** (2026-01-20) - **Intelligence Decision System**
+- ✅ **Intelligence Decision System (IDS)** completo com 5 camadas
+- ✅ **Background Check Service** - Validação CPF e busca de processos
+- ✅ **Lawyer Recommendation Engine** - Algoritmo de matching inteligente
+- ✅ **NLP Sentiment Analysis** - Análise de urgência com OpenAI
+- ✅ **LGPD Compliance Service** - Anonimização automática de dados
+- ✅ **Revenue Prediction** - BI com stored procedures avançadas
+- ✅ Correção de bugs críticos no UserController
+- ✅ Atualização do modelo Lawyer com novos campos
+- ✅ Documentação completa do IDS (IDS_GUIDE.md)
 
 ### **Versão 1.0.0** (2026-01-19)
 - ✅ Sistema completo de autenticação e recuperação de senha

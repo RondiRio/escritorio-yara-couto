@@ -18,10 +18,15 @@ class Lawyer extends Model
         'photo',
         'bio',
         'specialties',
+        'specialties_json',
         'email',
         'phone',
         'whatsapp',
         'cases_won',
+        'cases_total',
+        'success_rate',
+        'average_rating',
+        'total_ratings',
         'status',
         'display_order'
     ];
