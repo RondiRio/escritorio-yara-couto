@@ -19,31 +19,18 @@ session_start();
 
 // ==================== AUTOLOAD ====================
 
-// ==================== AUTOLOAD (MANUAL) ====================
-
 spl_autoload_register(function ($class) {
     $base_dir = __DIR__ . '/src/';
-    
-    // Converte o namespace (ex: Core\Controller) para um caminho de arquivo (ex: core/Controller.php)
-    $parts = explode('\\', $class);
 
-    // Converte o primeiro segmento do namespace (que é o diretório) para minúsculas
-    // ex: "Controllers" vira "controllers", "Models" vira "models"
-    if (!empty($parts)) {
-        $parts[0] = strtolower($parts[0]);
+    // Carrega classes da pasta libs (ex: PHPMailer, DotEnv)
+    if (strpos($class, 'PHPMailer\\PHPMailer\\') === 0) {
+        $file = $base_dir . 'libs/PHPMailer/' . str_replace('PHPMailer\\PHPMailer\\', '', $class) . '.php';
+        if (file_exists($file)) {
+            require $file;
+            return;
+        }
     }
 
-    $file = $base_dir . implode('/', $parts) . '.php';
-
-    // // Se o arquivo existir, inclua-o
-    // if (file_exists($file)) {
-    //     require $file;
-    // }
-    // ==================== AUTOLOAD (MANUAL) ====================
-
-spl_autoload_register(function ($class) {
-    $base_dir = __DIR__ . '/src/';
-    
     // Converte o namespace (ex: Core\Controller) para um caminho de arquivo
     $parts = explode('\\', $class);
 
@@ -59,31 +46,15 @@ spl_autoload_register(function ($class) {
         require $file;
     }
 });
-});
 
 // ==================== CARREGA VARIÁVEIS DE AMBIENTE ====================
 
-// // Carrega .env
-// if (file_exists(__DIR__ . '/.env')) {
-//     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-//     $dotenv->load();
-// }
-// Carrega .env (Manualmente)
+// Carrega DotEnv
+require_once __DIR__ . '/src/libs/DotEnv.php';
+
+// Carrega .env
 if (file_exists(__DIR__ . '/.env')) {
-    $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0) { // Ignora comentários
-            continue;
-        }
-        if (strpos($line, '=') !== false) {
-            list($name, $value) = explode('=', $line, 2);
-            $name = trim($name);
-            $value = trim($value);
-            putenv("$name=$value");
-            $_ENV[$name] = $value;
-            $_SERVER[$name] = $value;
-        }
-    }
+    DotEnv::load(__DIR__);
 }
 
 // ==================== CONFIGURAÇÕES DA APLICAÇÃO ====================

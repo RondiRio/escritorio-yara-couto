@@ -3,8 +3,9 @@
 ## 📋 Pré-requisitos
 
 - **XAMPP** instalado (PHP 7.4+ e MySQL)
-- **Composer** (opcional, para dependências)
 - Navegador web moderno
+
+**Nota:** Não é necessário Composer! Todas as bibliotecas estão incluídas no projeto.
 
 ---
 
@@ -160,29 +161,16 @@ chmod -R 755 storage/
 
 ---
 
-### **6. Instalar Dependências (Opcional)**
+### **6. Acessar o Sistema**
 
-Se você tiver o **Composer** instalado:
-
-```bash
-cd escritorio-yara-couto
-composer install
-```
-
-**Não tem Composer?** Tudo bem! As bibliotecas principais já estão incluídas.
-
----
-
-### **7. Acessar o Sistema**
-
-#### 7.1. Abrir no Navegador
+#### 6.1. Abrir no Navegador
 ```
 http://localhost/escritorio-yara-couto
 ```
 
 Você deve ver a **página inicial** do site (área pública).
 
-#### 7.2. Acessar o Painel Administrativo
+#### 6.2. Acessar o Painel Administrativo
 ```
 http://localhost/escritorio-yara-couto/admin/login
 ```
@@ -358,7 +346,6 @@ escritorio-yara-couto/
 ├── .env               # Configurações (NÃO COMMITAR)
 ├── .env.example       # Exemplo de configurações
 ├── .htaccess          # Configuração Apache
-├── composer.json      # Dependências PHP
 └── index.php          # Ponto de entrada
 ```
 

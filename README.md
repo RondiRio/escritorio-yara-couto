@@ -148,7 +148,6 @@ escritorio-yara-couto/
 │   └── cache/          # Cache
 ├── .env.example        # Exemplo de configurações
 ├── .htaccess          # Configuração Apache
-├── composer.json      # Dependências
 ├── index.php         # Ponto de entrada
 ├── check-install.php # Verificador de instalação
 ├── INSTALACAO.md    # Guia completo de instalação

@@ -73,7 +73,6 @@ escritorio-yara-couto/
 ├── .env                 # Configurações (não versionado)
 ├── .env.example         # Exemplo de configurações
 ├── .htaccess            # Configuração Apache
-├── composer.json        # Dependências PHP
 ├── check-install.php    # Script de verificação
 ├── INSTALACAO.md        # Guia de instalação
 ├── DEPLOY.md            # Guia de deploy
@@ -469,9 +468,9 @@ Role: Admin
 
 ### Atualizações
 - Manter PHP atualizado (segurança)
-- Atualizar bibliotecas (composer update)
 - Renovar certificado SSL automaticamente
 - Revisar logs periodicamente
+- Manter bibliotecas atualizadas (PHPMailer incluído)
 
 ---
 
